@@ -23,6 +23,16 @@ if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
     exit();
 }
 
+if (strlen($email) >= 30) {
+    echo "Слишком много символов у почты";
+    exit();
+}
+
+if (strlen($email) <= 6) {
+    echo "Слишком мало символов у почты";
+    exit();
+}
+
 $sql = "SELECT * FROM users WHERE email = '$email'";
 $result = $conn->query($sql);
 if ($result->num_rows > 0) {
@@ -61,8 +71,8 @@ if (!preg_match("/.*[!@#$%^&*()\-_=+{};:,<.>].*[!@#$%^&*()\-_=+{};:,<.>].*/", $p
 }
 
 if (preg_match("/([!@#$%^&*()\-_=+{};:,<.>]){2,}/", $password)) {
-    echo "Пароль не должен содержать два специальных символа, идущих подряд!";
-    exit();
+   echo "Пароль не должен содержать два специальных символа, идущих подряд!";
+   exit();
 }
 
 if (count(array_unique(str_split($password))) < strlen($password)) {
@@ -77,6 +87,16 @@ if (!preg_match("/[А-Яа-яЁё]/", $password) || !preg_match("/[A-Za-z]/", $p
 
 if (!preg_match("/^\+[0-9]{1,3}[0-9]{4,14}(?:x.+)?$/", $phone)) {
     echo "Неправильный номер телефона!";
+    exit();
+}
+
+if (strlen($phone) >= 13) {
+    echo "Слишком много символов у телефона";
+    exit();
+}
+
+if (strlen($phone) <= 11) {
+    echo "Слишком мало символов у телефона";
     exit();
 }
 
