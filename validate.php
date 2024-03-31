@@ -40,7 +40,7 @@ if ($result->num_rows > 0) {
     exit();
 }
 
-$forbiddenWords = ['password', 'qwerty', '123456']; // запрещенные слова
+$forbiddenWords = ['password', 'qwerty', '123456', '123456789', 'guest', '12345678', '111111', '12345', 'col123456', '123123', '696969', '000000', '24022022', 'abc123']; // запрещенные слова
 
 foreach ($forbiddenWords as $word) {
     if (stripos($password, $word) !== false) {
