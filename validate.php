@@ -40,6 +40,15 @@ if ($result->num_rows > 0) {
     exit();
 }
 
+$forbiddenWords = ['password', 'qwerty', '123456']; // запрещенные слова
+
+foreach ($forbiddenWords as $word) {
+    if (stripos($password, $word) !== false) {
+        echo 'Пароль не может содержать слово ' . $word;
+        exit();
+    }
+}
+
 if (!preg_match("/.{8,}/", $password)) {
     echo "Пароль должен содержать не менее 8 символов!";
     exit();
